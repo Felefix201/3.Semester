@@ -33,6 +33,7 @@ public class BufferAldi {
     }
 
     public synchronized String get() throws InterruptedException {
+        System.out.println("this happens");
         while (blockingQueue.size() == 0) {
             wait();
         }

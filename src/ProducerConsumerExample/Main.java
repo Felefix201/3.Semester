@@ -21,7 +21,6 @@ public class Main {
         consumerCusomer.start();
         consumerCusomer2.start();
         consumerCusomer3.start();
-
     }
 
 }
