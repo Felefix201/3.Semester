@@ -18,7 +18,6 @@ public class Consumer extends Thread {
 
     void terminate() {
         terminate = true;
-        System.out.println("Consumer terminated");
     }
 
     private boolean isFull() {
@@ -27,14 +26,15 @@ public class Consumer extends Thread {
 
     @Override
     public void run() {
-        while (true) {
-            String value = null;
+        while (!terminate) {
+            String value = "";
             value = lagerBuffer.get();
             while(!isFull()) {
                 availablaProducts.add(value);
             }
             System.out.println("Consumed: " + value);
         }
+        System.out.println("Consumer terminated");
     }
 }
 
