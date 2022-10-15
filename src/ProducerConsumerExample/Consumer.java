@@ -4,13 +4,13 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Consumer extends Thread {
     private String marketFranchiseName;
-    private ArrayBlockingQueue<String> availablaProducts;
+    private ArrayBlockingQueue<String> availableProductsInQueue;
     private LagerBuffer lagerBuffer;
     private int productCapacity;
     private boolean terminate = false;
 
     public Consumer(LagerBuffer lagerBuffer, int productCapacity, String marketFranchiseName) {
-        this.availablaProducts = new ArrayBlockingQueue<>(productCapacity);
+        this.availableProductsInQueue = new ArrayBlockingQueue<>(productCapacity);
         this.productCapacity = productCapacity;
         this.lagerBuffer = lagerBuffer;
         this.marketFranchiseName = marketFranchiseName;
@@ -21,7 +21,7 @@ public class Consumer extends Thread {
     }
 
     private boolean isFull() {
-        return availablaProducts.size() == productCapacity;
+        return availableProductsInQueue.size() == productCapacity;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Consumer extends Thread {
             String value = "";
             value = lagerBuffer.get();
             while(!isFull()) {
-                availablaProducts.add(value);
+                availableProductsInQueue.add(value);
             }
             System.out.println("Consumed: " + value);
         }

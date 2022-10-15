@@ -17,9 +17,9 @@ public class ProducerBauer extends Thread {
         while (!terminate) {
             int randomInt = (int) (Math.random() * 10);
             String value = "";
-            if (randomInt > 3 && randomInt < 6) {
+            if (randomInt < 4) {
                 value = "Kartoffeln";
-            } else if (randomInt > 3) {
+            } else if (randomInt < 8) {
                 value = "Mais";
             } else {
                 value = "Roggen";

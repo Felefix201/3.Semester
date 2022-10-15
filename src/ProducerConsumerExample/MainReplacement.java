@@ -6,6 +6,7 @@ public class MainReplacement {
         ProducerBauer producerBauer = new ProducerBauer(lagerBuffer);
         Consumer consumer = new Consumer(lagerBuffer, 10, "Rewe");
         Consumer consumer2 = new Consumer(lagerBuffer, 10, "Aldi");
+
         producerBauer.start();
         consumer.start();
         consumer2.start();
