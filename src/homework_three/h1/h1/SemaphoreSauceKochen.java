@@ -22,7 +22,7 @@ public class SemaphoreSauceKochen extends Thread {
             kochen();
             binarySemaphores[3].release();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+           new InterruptedException("SauceKochen was called at the wrong time");
         }
     }
 }

@@ -1,9 +1,6 @@
-package homework_three.h1;
-
-import org.junit.jupiter.api.Test;
+package homework_three.h1.LinkedBlockingQueue;
 
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +10,7 @@ class LinkedBlockingQueueTest {
         List<Integer> list = List.of(1, 2, 3, 4, 5);
         Thread t1 = new Thread(() -> {
             try {
-                queue2.putList(list);
+                queue2.put(list);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -22,7 +19,7 @@ class LinkedBlockingQueueTest {
         Thread t2 = new Thread(() -> {
             try {
                 for (int i = 0; i < 5; i++) {
-                    if (list.get(i) == queue2.get()){
+                    if (list.get(i) == queue2.get()) {
                         System.out.println("Test passed");
                     } else {
                         System.out.println("Test failed");
@@ -40,7 +37,7 @@ class LinkedBlockingQueueTest {
 
     @org.junit.jupiter.api.Test
     void test() throws InterruptedException {
-        LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<>(2);
+        LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<>(3);
         Thread t1 = new Thread(() -> {
             try {
                 queue.put(1);
@@ -59,10 +56,21 @@ class LinkedBlockingQueueTest {
                 e.printStackTrace();
             }
         });
+        Thread t3 = new Thread(() -> {
+            try {
+                assertNotEquals(1, queue.get());
+                assertNotEquals(2, queue.get());
+                assertNotEquals(3, queue.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
         t1.start();
         t2.start();
+//        t3.start();
         t1.join();
         t2.join();
+        t3.join();
         queue.put(1);
         queue.put(2);
         assertEquals(1, queue.get());
@@ -75,7 +83,7 @@ class LinkedBlockingQueueTest {
         List<Integer> list = List.of(1, 2, 3, 4, 5);
         Thread t1 = new Thread(() -> {
             try {
-                queue2.putList(list);
+                queue2.put(list);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,4 +1,4 @@
-package homework_three.h1;
+package homework_three.h1.LinkedBlockingQueue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,35 +6,17 @@ import java.util.concurrent.Semaphore;
 
 public class LinkedBlockingQueue<T> {
     private LinkedList<T> linkedList = new LinkedList();
-    private CountingSemaphore fullSemaphore;
+    private CountingSemaphore itemCounter;
+    private Semaphore availableItems;
     private CountingSemaphore emptySemaphore = new CountingSemaphore(0);
     private final Semaphore mutex = new Semaphore(1);
 
     LinkedBlockingQueue(int capacity) {
-        fullSemaphore = new CountingSemaphore(capacity);
-    }
-
-    public void putList(List<T> valueList) throws InterruptedException {
-        int size = valueList.size();
-        for (int i = 0; i < size; i++) {
-            fullSemaphore.acquire();
-        }
-
-//        synchronized (this) {
-        mutex.acquire();
-        for (int i = 0; i < size; i++) {
-            linkedList.add( valueList.get(i));
-        }
-
-        //        }
-        mutex.release();
-        for (int i = 0; i < size; i++) {
-            emptySemaphore.release();
-        }
+        itemCounter = new CountingSemaphore(capacity);
     }
 
     public void put(T value) throws InterruptedException {
-        fullSemaphore.acquire();
+        itemCounter.acquire();
 //        synchronized (this) {
         mutex.acquire();
         linkedList.add(value);
@@ -44,6 +26,23 @@ public class LinkedBlockingQueue<T> {
         emptySemaphore.release();
     }
 
+
+    public void put(List<T> valueList) throws InterruptedException {
+        int size = valueList.size();
+        itemCounter.acquire(size);
+
+//        synchronized (this) {
+        mutex.acquire();
+        for (int i = 0; i < size; i++) {
+            linkedList.add(valueList.get(i));
+        }
+
+        //        }
+        mutex.release();
+        emptySemaphore.release(size);
+    }
+
+
     public T get() throws InterruptedException {
         emptySemaphore.acquire();
 //        synchronized (this) {
@@ -52,7 +51,7 @@ public class LinkedBlockingQueue<T> {
             return linkedList.poll();
         } finally {
             mutex.release();
-            fullSemaphore.release();
+            itemCounter.release();
         }
 //        }
     }
