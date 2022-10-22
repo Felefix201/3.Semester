@@ -1,12 +1,13 @@
 package hw4.LeserSchreiberKonzept.A2;
 
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Lock {
     private boolean isLocked = false;
     private Thread lockingThread;
 
-    private Queue<Thread> waitingThreads;
+    private Queue<Thread> waitingThreads = new LinkedBlockingQueue<>();
 
     private int lockCount = 0;
 
