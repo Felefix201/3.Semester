@@ -1,4 +1,4 @@
-package V6.ReentrantLockWithCondition;
+package V6.ReentrendLockWithCondition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
