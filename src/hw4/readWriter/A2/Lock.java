@@ -3,7 +3,7 @@ package hw4.readWriter.A2;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Lock {
+public class Lock { //TODO Adham, mach das hier mal richtig so wie in der A Übung besprochen
     private boolean isLocked = false;
     private Thread lockingThread;
 
@@ -11,7 +11,7 @@ public class Lock {
 
     private int lockCount = 0;
 
-    public synchronized void lock() throws InterruptedException {
+    public synchronized void lock() throws InterruptedException {   //TODO Anpassen von Adham
         if (lockingThread != Thread.currentThread()) {
             waitingThreads.add(Thread.currentThread());
             while (isLocked || lockingThread != Thread.currentThread()) {
@@ -23,7 +23,7 @@ public class Lock {
         lockingThread = Thread.currentThread();
     }
 
-    public synchronized void lockInterruptibly() throws InterruptedException {
+    public synchronized void lockInterruptibly() throws InterruptedException {      //TODO vielleicht anpassen???
         if (lockingThread != Thread.currentThread()) {
             waitingThreads.add(Thread.currentThread());
             while (isLocked && lockingThread != Thread.currentThread()) {
@@ -35,7 +35,7 @@ public class Lock {
         lockingThread = Thread.currentThread();
     }
 
-    public synchronized void unlock() {
+    public synchronized void unlock() {     //TODO Anpassen von Adham
         if (Thread.currentThread() != lockingThread) {
             throw new IllegalLockStateException("Current thread not owner");
         }
