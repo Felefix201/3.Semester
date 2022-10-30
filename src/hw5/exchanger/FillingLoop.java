@@ -29,7 +29,7 @@ class FillingLoop implements Runnable {
                     q = exchanger.exchange(q);
                     System.out.println("FillingLoop received " + q);
                     Thread.sleep(2000);
-                } 
+                }
                     q.put(value);
 
             }
