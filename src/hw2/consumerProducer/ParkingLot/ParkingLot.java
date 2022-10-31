@@ -21,6 +21,7 @@ public class ParkingLot {
         while (availablePlaces == 0) {
             wait();
         }
+        availablePlaces--;
         queue.take();
         System.out.println(Thread.currentThread().getName() + " has entered the parking lot. Available places: " + availablePlaces);
     }
