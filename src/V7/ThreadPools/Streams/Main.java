@@ -15,13 +15,33 @@ public class Main {
 //        System.out.println(redItems);
 //        List<Item> redCheepItems = filterItemsByColorAndCost(redItems, item -> item.getCost() < 70);
 //        System.out.println(redCheepItems);
-        Arrays.stream(items)
-                .filter(item -> item.getColor() == Item.Color.RED)
-                .filter(item -> item.getCost() < 70)
-                .mapToInt(item -> item.getWeight())
-                //.average().getAsDouble();
-                .forEach(System.out::println);
+        Arrays.stream(items).parallel().filter(item -> {
+                    System.out.println("Filteringbycolor" + Thread.currentThread());
+                    return item.getColor() != Item.Color.RED;
+                }).
+                filter(item -> {
+                    System.out.println("Filteringbyweight" + Thread.currentThread());
+                    return item.getCost() < 70;
+                }).mapToInt(item -> {
+                    System.out.println("Mappingtoint" + Thread.currentThread());
+                    return item.getWeight();
+                }).average().getAsDouble();
+//        Arrays.stream(items)
+//                .filter(item -> {
+//                    System.out.println("F by color " + Thread.currentThread());
+//                    return item.getColor() != Item.Color.RED;
+//                })
+//                .filter(item -> {
+//                    System.out.println("F by weight " + Thread.currentThread());
+//                    return item.getCost() < 70;
+//                })
+//                .mapToInt(item -> {
+//                    System.out.println("Mapping to int " + Thread.currentThread());
+//                    return item.getWeight();
+//                })
+//                .average().getAsDouble();
     }
+
     public static List<Item> filterItemsByColorAndCost(List<Item> items, Predicate<Item> filterPredicate) {
         ArrayList<Item> outputList = new ArrayList<>();
         for (Item item : items) {

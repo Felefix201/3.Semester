@@ -26,10 +26,13 @@ public class Buffer {
         while (dataQueue.size() == 0) {
             wait();
         }
-        int data = dataQueue.poll();
+        int data = dataQueue.take();
         System.out.println("Consumed: " + data);
-        notifyAll();
-        return data;
+        try{
+            return data;
+        } finally {
+            notifyAll();
+        }
     }
 }
 

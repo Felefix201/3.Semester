@@ -18,10 +18,11 @@ public class Producer extends Thread {
             try {
                 buffer.put(random.nextInt());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Producer interupted");
             }
         }
-        System.out.println("Producer interupted");
     }
-
+    public void terminate() {
+        interrupt();
+    }
 }

@@ -17,6 +17,8 @@ public class Consumer extends Thread{
                 System.out.println("Consumer interrupted");
             }
         }
-        System.out.println("Consumer interupted");
+    }
+    public void terminate() {
+        interrupt();
     }
 }
