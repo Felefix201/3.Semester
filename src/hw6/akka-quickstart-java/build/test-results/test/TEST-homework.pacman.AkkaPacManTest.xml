@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="homework.pacman.AkkaPacManTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-04T13:58:42" hostname="DESKTOP-VAL58TU" time="1.036">
+  <properties/>
+  <testcase name="testGreeterActorSendingOfGreeting" classname="homework.pacman.AkkaPacManTest" time="1.036"/>
+  <system-out><![CDATA[[2022-11-04 14:58:42,904] [INFO] [akka.event.slf4j.Slf4jLogger] [AkkaPacManTest-akka.actor.default-dispatcher-3] [] - Slf4jLogger started
+[2022-11-04 14:58:42,937] [INFO] [akka.event.slf4j.Slf4jLogger] [GameRoot-akka.actor.default-dispatcher-3] [] - Slf4jLogger started
+[2022-11-04 14:58:43,972] [INFO] [akka.actor.CoordinatedShutdown] [AkkaPacManTest-akka.actor.default-dispatcher-3] [CoordinatedShutdown(akka://AkkaPacManTest)] - Running CoordinatedShutdown with reason [ActorSystemTerminateReason]
+]]></system-out>
+  <system-err><![CDATA[SLF4J: A number (1) of logging calls during the initialization phase have been intercepted and are
+SLF4J: now being replayed. These are subject to the filtering rules of the underlying logging system.
+SLF4J: See also http://www.slf4j.org/codes.html#replay
+]]></system-err>
+</testsuite>
