@@ -6,7 +6,7 @@ public class CyclicBarrier {
 
     private int counter;
 
-    private int NumberWaiting;
+    private int numberWaiting;
 
     public void setInitial(int initial) {
         this.initial = initial;
@@ -14,18 +14,20 @@ public class CyclicBarrier {
 
     public void setCount() {
         this.counter = initial;
-        this.NumberWaiting = 0;
+        this.numberWaiting = 0;
     }
 
-    public synchronized void await() throws InterruptedException {
+    public synchronized void await() throws InterruptedException {  //TODO deadlock möglich ...
         counter--;
-        NumberWaiting++;
+        numberWaiting++;
         if (counter == 0) {
             counter = initial;
-            NumberWaiting = 0;
+            numberWaiting = 0;
             notifyAll();
         } else {
-            wait();
+            while (numberWaiting != initial) {
+                wait();
+            }
         }
     }
 
@@ -34,6 +36,6 @@ public class CyclicBarrier {
     }
 
     public int getNumberWaiting() {
-        return NumberWaiting;
+        return numberWaiting;
     }
 }

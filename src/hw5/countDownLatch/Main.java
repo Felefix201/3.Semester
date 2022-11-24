@@ -8,11 +8,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         CountDownLatch countDownLatch = new CountDownLatch();
         countDownLatch.setInitial(3);
         countDownLatch.setCount();
-        Runnable rCyclic = () -> { try {
+
+        Runnable rCyclic = () -> {
+            try {
             Random random = new Random();
             System.out.println(Thread.currentThread() + " starting.");
             Thread.sleep(random.nextInt(5000));
@@ -21,6 +22,7 @@ public class Main {
             System.out.println(Thread.currentThread() + " SYNCED");
         } catch (Exception e) {
         }};
+
         new Thread(rCyclic).start();
         new Thread(rCyclic).start();
         new Thread(rCyclic).start();
