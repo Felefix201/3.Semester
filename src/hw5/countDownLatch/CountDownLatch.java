@@ -2,7 +2,6 @@ package hw5.countDownLatch;
 
 public class CountDownLatch {
 
-
     private int initial;
 
     private int counter;
